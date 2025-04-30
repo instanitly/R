@@ -40,7 +40,7 @@ As this is a private repository, contributing is limited to invited collaborator
 Please contact the repository owner for access.
 
 ## License
-This project is licensed under the [License Name] - see the LICENSE file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Contact
 * GitHub: [@instanitly](https://github.com/instanitly)
