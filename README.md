@@ -9,8 +9,6 @@ This repository contains learning materials and exercises for learning the R pro
 - **intro_to_R.R**: A comprehensive introduction to R programming covering basic operations, data structures, control structures, functions, and more.
 - **data_analysis_practice.R**: Practical examples of data analysis using R's built-in datasets.
 - **exercise_solutions.R**: Solutions to the exercises from the intro script (try the exercises yourself first!).
-- **loop.R**: Example script demonstrating various uses of single for loops.
-- **nested_loop.R**: Example script demonstrating nested for loops for more complex iterations.
 
 ### Setup & Reference
 - **R_setup_guide.md**: Instructions for setting up your R environment and additional learning resources.
@@ -45,5 +43,5 @@ See the **R_setup_guide.md** file for a comprehensive list of additional learnin
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Changelog
+* 2025-05-08: Improved code styling and formatting
 * 2025-04-28: Repository initialized
-```
