@@ -188,20 +188,20 @@ employees <- data.frame(
 
 # # Filter rows
 # it_employees <- employees %>% filter(department == "IT")
-# 
+#
 # # Select columns
 # names_salaries <- employees %>% select(name, salary)
-# 
+#
 # # Arrange (sort) data
 # sorted_by_salary <- employees %>% arrange(desc(salary))
-# 
+#
 # # Create new columns
-# employees_with_bonus <- employees %>% 
-#   mutate(bonus = salary * 0.10, 
+# employees_with_bonus <- employees %>%
+#   mutate(bonus = salary * 0.10,
 #          total_comp = salary + bonus)
-# 
+#
 # # Summarize data
-# dept_summary <- employees %>% 
+# dept_summary <- employees %>%
 #   group_by(department) %>%
 #   summarize(
 #     avg_salary = mean(salary),
@@ -237,12 +237,12 @@ hist(data, col="lightblue", main="Histogram Example")
 
 # Exercise 1: Create a vector of the first 10 even numbers
 # Your code here:
-# even_numbers <- 
+# even_numbers <-
 
 # Exercise 2: Calculate the sum and mean of numbers from 1 to 100
 # Your code here:
-# sum_result <- 
-# mean_result <- 
+# sum_result <-
+# mean_result <-
 
 # Exercise 3: Create a function that returns both the minimum and maximum of a vector
 # Your code here:

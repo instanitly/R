@@ -61,27 +61,27 @@ cor(mtcars)
 # =====================================================
 
 # Basic histogram
-hist(mtcars$mpg, 
+hist(mtcars$mpg,
      main = "Distribution of Miles Per Gallon",
      xlab = "Miles Per Gallon",
      col = "lightblue",
      breaks = 10)
 
 # Boxplot
-boxplot(mtcars$mpg, 
+boxplot(mtcars$mpg,
         main = "Miles Per Gallon Boxplot",
         ylab = "MPG",
         col = "lightgreen")
 
 # Boxplot by groups
-boxplot(mpg ~ cyl, data = mtcars, 
+boxplot(mpg ~ cyl, data = mtcars,
         main = "MPG by Number of Cylinders",
         xlab = "Number of Cylinders",
         ylab = "Miles Per Gallon",
         col = c("lightblue", "lightgreen", "lightpink"))
 
 # Scatter plot
-plot(mtcars$wt, mtcars$mpg, 
+plot(mtcars$wt, mtcars$mpg,
      main = "MPG vs. Weight",
      xlab = "Weight (1000 lbs)",
      ylab = "Miles Per Gallon",
@@ -89,7 +89,7 @@ plot(mtcars$wt, mtcars$mpg,
      col = "blue")
 
 # Multiple scatter plots (pairs plot)
-pairs(mtcars[, c("mpg", "disp", "hp", "wt")], 
+pairs(mtcars[, c("mpg", "disp", "hp", "wt")],
       main = "Scatterplot Matrix")
 
 # =====================================================
@@ -104,7 +104,7 @@ model1 <- lm(mpg ~ wt, data = mtcars)
 summary(model1)
 
 # Plot the regression line
-plot(mtcars$wt, mtcars$mpg, 
+plot(mtcars$wt, mtcars$mpg,
      main = "MPG vs. Weight with Regression Line",
      xlab = "Weight (1000 lbs)",
      ylab = "Miles Per Gallon",
@@ -166,7 +166,7 @@ aggregate(mpg ~ cyl, data = mtcars, mean)
 # mtcars$power_to_weight <- ...
 # plot(...)
 
-# Exercise 5: Build a linear model that predicts quarter mile time (qsec) based on 
+# Exercise 5: Build a linear model that predicts quarter mile time (qsec) based on
 # horsepower, weight, and transmission type. Interpret the results.
 # Your code here:
 # qsec_model <- ...

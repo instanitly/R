@@ -44,11 +44,6 @@ See the **R_setup_guide.md** file for a comprehensive list of additional learnin
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Contact
-* GitHub: [@instanitly](https://github.com/instanitly)
-* [Other contact information]
-```
-
 ## Changelog
 * 2025-04-28: Repository initialized
 ```
