@@ -28,7 +28,7 @@ min_max <- function(x) {
   }
   
   # Return a named list with min and max values
-  return(list(minimum = min(x), maximum = max(x)))
+  list(minimum = min(x), maximum = max(x))
 }
 
 # Test the function
@@ -49,27 +49,27 @@ student_grades$average <- rowMeans(student_grades[, c("math", "science", "histor
 
 # Determine letter grade based on average
 student_grades$letter_grade <- ifelse(student_grades$average >= 90, "A",
-                              ifelse(student_grades$average >= 80, "B",
-                              ifelse(student_grades$average >= 70, "C",
-                              ifelse(student_grades$average >= 60, "D", "F"))))
+                                ifelse(student_grades$average >= 80, "B",
+                                       ifelse(student_grades$average >= 70, "C",
+                                              ifelse(student_grades$average >= 60, "D", "F"))))
 
 print(student_grades)
 
 # Exercise 5: Write a function to determine if a number is prime
 is_prime <- function(n) {
   # Handle special cases
-  if (n <= 1) return(FALSE)
-  if (n <= 3) return(TRUE)
-  if (n %% 2 == 0 || n %% 3 == 0) return(FALSE)
-  
-  # Check for divisibility by values of form 6k ± 1
-  i <- 5
-  while (i * i <= n) {
-    if (n %% i == 0 || n %% (i + 2) == 0) return(FALSE)
-    i <- i + 6
+  if (n <= 1) FALSE
+  else if (n <= 3) TRUE
+  else if (n %% 2 == 0 || n %% 3 == 0) FALSE
+  else {
+    # Check for divisibility by values of form 6k ± 1
+    i <- 5
+    while (i * i <= n) {
+      if (n %% i == 0 || n %% (i + 2) == 0) FALSE
+      i <- i + 6
+    }
+    TRUE
   }
-  
-  return(TRUE)
 }
 
 # Test the function with a few numbers
@@ -85,19 +85,20 @@ for (num in test_numbers) {
 # Bonus Exercise 1: Fibonacci sequence
 # Write a function that generates the first n numbers in the Fibonacci sequence
 fibonacci <- function(n) {
-  if (n <= 0) return(NULL)
-  if (n == 1) return(0)
-  if (n == 2) return(c(0, 1))
-  
-  fib <- numeric(n)
-  fib[1] <- 0
-  fib[2] <- 1
-  
-  for (i in 3:n) {
-    fib[i] <- fib[i-1] + fib[i-2]
+  if (n <= 0) NULL
+  else if (n == 1) 0
+  else if (n == 2) c(0, 1)
+  else {
+    fib <- numeric(n)
+    fib[1] <- 0
+    fib[2] <- 1
+    
+    for (i in 3:n) {
+      fib[i] <- fib[i - 1] + fib[i - 2]
+    }
+    
+    fib
   }
-  
-  return(fib)
 }
 
 # Test the function
@@ -116,14 +117,15 @@ remove_outliers <- function(x) {
   result <- x
   result[abs(x - mean_x) > threshold] <- NA
   
-  return(result)
+  result
 }
 
 # Test the function
 test_data <- c(5, 7, 8, 6, 9, 30, 8, 7, 6, 25, 8)
 cleaned_data <- remove_outliers(test_data)
 print(paste("Original data:", paste(test_data, collapse = ", ")))
-print(paste("Cleaned data:", paste(ifelse(is.na(cleaned_data), "NA", cleaned_data), collapse = ", ")))
+print(paste("Cleaned data:", paste(ifelse(is.na(cleaned_data), "NA", cleaned_data), 
+                                   collapse = ", ")))
 
 # Bonus Exercise 3: Monte Carlo Simulation
 # Estimate the value of π using Monte Carlo simulation
@@ -133,13 +135,11 @@ estimate_pi <- function(n_points = 10000) {
   y <- runif(n_points, -1, 1)
   
   # Count points inside the unit circle
-  inside_circle <- sum(x^2 + y^2 <= 1)
+  inside_circle <- sum(x ^ 2 + y ^ 2 <= 1)
   
   # Estimate π: area of circle = π * r^2, area of square = (2r)^2 = 4r^2
   # So π = 4 * (area of circle/area of square) = 4 * (points inside circle/total points)
-  pi_estimate <- 4 * inside_circle / n_points
-  
-  return(pi_estimate)
+  4 * inside_circle / n_points
 }
 
 # Test the function with different numbers of points

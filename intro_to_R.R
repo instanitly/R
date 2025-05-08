@@ -15,7 +15,7 @@
 10 - 5      # Subtraction
 4 * 5       # Multiplication
 20 / 4      # Division
-2^3         # Exponentiation
+2 ^ 3       # Exponentiation
 10 %% 3     # Modulo (remainder)
 10 %/% 3    # Integer division
 
@@ -146,13 +146,13 @@ mean(c(10, 20, 30))   # Calculate average
 # 4.2 Creating your own functions
 # Function to calculate square
 square <- function(x) {
-  return(x^2)
+  x ^ 2
 }
 
 # Function to convert Celsius to Fahrenheit
 celsius_to_fahrenheit <- function(celsius) {
-  fahrenheit <- (celsius * 9/5) + 32
-  return(fahrenheit)
+  fahrenheit <- (celsius * 9 / 5) + 32
+  fahrenheit
 }
 
 # Use the functions
@@ -161,8 +161,8 @@ celsius_to_fahrenheit(25)
 
 # Function with multiple arguments
 calculate_bmi <- function(weight, height) {
-  bmi <- weight / (height^2)
-  return(bmi)
+  bmi <- weight / (height ^ 2)
+  bmi
 }
 
 calculate_bmi(70, 1.75)
@@ -183,31 +183,6 @@ employees <- data.frame(
   years = c(2, 5, 3, 7, 4)
 )
 
-# The following operations require dplyr to be installed
-# Uncomment them once you've installed the package
-
-# # Filter rows
-# it_employees <- employees %>% filter(department == "IT")
-#
-# # Select columns
-# names_salaries <- employees %>% select(name, salary)
-#
-# # Arrange (sort) data
-# sorted_by_salary <- employees %>% arrange(desc(salary))
-#
-# # Create new columns
-# employees_with_bonus <- employees %>%
-#   mutate(bonus = salary * 0.10,
-#          total_comp = salary + bonus)
-#
-# # Summarize data
-# dept_summary <- employees %>%
-#   group_by(department) %>%
-#   summarize(
-#     avg_salary = mean(salary),
-#     total_employees = n()
-#   )
-
 # =====================================================
 # SECTION 6: DATA VISUALIZATION
 # =====================================================
@@ -215,17 +190,18 @@ employees <- data.frame(
 # Basic plotting
 # Scatter plot
 x <- 1:10
-y <- x^2
-plot(x, y, main="Simple Scatter Plot", xlab="X", ylab="Y", col="blue", pch=19)
+y <- x ^ 2
+plot(x, y, main = "Simple Scatter Plot", xlab = "X", ylab = "Y", 
+     col = "blue", pch = 19)
 
 # Bar plot
 counts <- c(25, 15, 30, 20)
 names <- c("A", "B", "C", "D")
-barplot(counts, names.arg=names, col="cyan", main="Bar Plot Example")
+barplot(counts, names.arg = names, col = "cyan", main = "Bar Plot Example")
 
 # Histogram
 data <- rnorm(100)  # Generate 100 random numbers
-hist(data, col="lightblue", main="Histogram Example")
+hist(data, col = "lightblue", main = "Histogram Example")
 
 # For more advanced visualizations, you can use ggplot2
 # install.packages("ggplot2")
