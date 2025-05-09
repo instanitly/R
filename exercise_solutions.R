@@ -150,4 +150,222 @@ pi_estimate_100k <- estimate_pi(100000)
 print(paste("π estimate with 1,000 points:", pi_estimate_1k))
 print(paste("π estimate with 10,000 points:", pi_estimate_10k))
 print(paste("π estimate with 100,000 points:", pi_estimate_100k))
-print(paste("Actual π value:", pi)) 
+print(paste("Actual π value:", pi))
+
+# =====================================================
+# SOLUTIONS TO NEW EXERCISES
+# =====================================================
+
+# Exercise 1: Data Cleaning Function
+clean_dataset <- function(data) {
+  # Check if input is a data frame
+  if (!is.data.frame(data)) {
+    stop("Input must be a data frame")
+  }
+  
+  # Remove rows with more than 2 missing values
+  missing_counts <- rowSums(is.na(data))
+  data <- data[missing_counts <= 2, ]
+  
+  # Replace remaining missing values with column means
+  for (col in names(data)) {
+    if (is.numeric(data[[col]])) {
+      data[[col]][is.na(data[[col]])] <- mean(data[[col]], na.rm = TRUE)
+    }
+  }
+  
+  # Convert character columns to factors
+  for (col in names(data)) {
+    if (is.character(data[[col]])) {
+      data[[col]] <- as.factor(data[[col]])
+    }
+  }
+  
+  return(data)
+}
+
+# Test the function
+test_data <- data.frame(
+  name = c("Alice", "Bob", "Charlie", "David", "Eva"),
+  age = c(25, NA, 30, NA, 35),
+  score = c(85, 90, NA, 88, NA),
+  grade = c("A", "B", "A", "C", "B")
+)
+cleaned_data <- clean_dataset(test_data)
+print(cleaned_data)
+
+# Exercise 2: Data Visualization Function
+create_comprehensive_plot <- function(data) {
+  # Check if input is a data frame
+  if (!is.data.frame(data)) {
+    stop("Input must be a data frame")
+  }
+  
+  # Create a multi-panel plot
+  par(mfrow = c(2, 2))
+  
+  # Get numeric and categorical columns
+  numeric_cols <- sapply(data, is.numeric)
+  categorical_cols <- sapply(data, is.factor) | sapply(data, is.character)
+  
+  # Plot numeric variables
+  if (sum(numeric_cols) >= 2) {
+    numeric_data <- data[, numeric_cols]
+    plot(numeric_data[, 1], numeric_data[, 2],
+         main = "Numeric Variables",
+         xlab = names(numeric_data)[1],
+         ylab = names(numeric_data)[2],
+         col = "blue",
+         pch = 19)
+  }
+  
+  # Plot categorical variables
+  if (sum(categorical_cols) > 0) {
+    categorical_data <- data[, categorical_cols]
+    for (col in names(categorical_data)) {
+      barplot(table(categorical_data[[col]]),
+              main = paste("Distribution of", col),
+              col = rainbow(length(unique(categorical_data[[col]]))))
+    }
+  }
+  
+  # Reset plot layout
+  par(mfrow = c(1, 1))
+}
+
+# Test the function
+test_data <- data.frame(
+  age = c(25, 30, 35, 40, 45),
+  score = c(85, 90, 95, 88, 92),
+  grade = c("A", "B", "A", "C", "B")
+)
+create_comprehensive_plot(test_data)
+
+# Exercise 3: Statistical Analysis Function
+perform_statistical_analysis <- function(data) {
+  # Check if input is a data frame
+  if (!is.data.frame(data)) {
+    stop("Input must be a data frame")
+  }
+  
+  # Get numeric columns
+  numeric_cols <- sapply(data, is.numeric)
+  numeric_data <- data[, numeric_cols]
+  
+  # Calculate basic statistics
+  stats <- lapply(numeric_data, function(x) {
+    list(
+      mean = mean(x),
+      median = median(x),
+      sd = sd(x)
+    )
+  })
+  
+  # Calculate correlations
+  cor_matrix <- cor(numeric_data)
+  
+  # Create summary report
+  cat("Statistical Analysis Report\n")
+  cat("=========================\n\n")
+  
+  cat("Basic Statistics:\n")
+  for (col in names(stats)) {
+    cat("\n", col, ":\n")
+    cat("  Mean:", stats[[col]]$mean, "\n")
+    cat("  Median:", stats[[col]]$median, "\n")
+    cat("  Standard Deviation:", stats[[col]]$sd, "\n")
+  }
+  
+  cat("\nCorrelation Matrix:\n")
+  print(cor_matrix)
+  
+  return(list(stats = stats, correlations = cor_matrix))
+}
+
+# Test the function
+test_data <- data.frame(
+  age = c(25, 30, 35, 40, 45),
+  score = c(85, 90, 95, 88, 92),
+  experience = c(2, 5, 8, 12, 15)
+)
+analysis_results <- perform_statistical_analysis(test_data)
+
+# Exercise 4: Data Transformation Function
+transform_dataset <- function(data, group_by_col) {
+  # Check if input is a data frame
+  if (!is.data.frame(data)) {
+    stop("Input must be a data frame")
+  }
+  
+  # Check if group_by_col exists
+  if (!(group_by_col %in% names(data))) {
+    stop("Group by column not found in data")
+  }
+  
+  # Convert to long format
+  long_data <- reshape2::melt(data, id.vars = group_by_col)
+  
+  # Create new variables
+  if (is.numeric(data[[group_by_col]])) {
+    long_data$group_category <- ifelse(data[[group_by_col]] < mean(data[[group_by_col]]),
+                                     "Below Average", "Above Average")
+  }
+  
+  # Aggregate data
+  aggregated_data <- aggregate(value ~ variable + group_category,
+                             data = long_data,
+                             FUN = mean)
+  
+  return(list(
+    long_format = long_data,
+    aggregated = aggregated_data
+  ))
+}
+
+# Test the function
+test_data <- data.frame(
+  group = c("A", "B", "A", "B", "A"),
+  value1 = c(10, 20, 15, 25, 12),
+  value2 = c(30, 40, 35, 45, 32)
+)
+transformed_data <- transform_dataset(test_data, "group")
+print(transformed_data)
+
+# Exercise 5: R Markdown Report
+# Create a new file called "analysis_report.Rmd" with the following content:
+# ---
+# title: "Data Analysis Report"
+# output: html_document
+# ---
+# 
+# ```{r setup, include=FALSE}
+# knitr::opts_chunk$set(echo = TRUE)
+# ```
+# 
+# # Data Analysis Report
+# 
+# ## Data Import
+# ```{r}
+# # Import the data
+# data <- read.csv("your_data.csv")
+# ```
+# 
+# ## Basic Analysis
+# ```{r}
+# # Perform basic analysis
+# summary(data)
+# ```
+# 
+# ## Visualizations
+# ```{r}
+# # Create visualizations
+# plot(data$variable1, data$variable2,
+#      main = "Relationship between Variables",
+#      xlab = "Variable 1",
+#      ylab = "Variable 2")
+# ```
+# 
+# ## Conclusions
+# * Add your interpretations here
+# * Include key findings
+# * Discuss implications 

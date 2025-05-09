@@ -155,6 +155,7 @@ celsius_to_fahrenheit <- function(celsius) {
   fahrenheit
 }
 
+
 # Use the functions
 square(4)
 celsius_to_fahrenheit(25)
@@ -191,7 +192,7 @@ employees <- data.frame(
 # Scatter plot
 x <- 1:10
 y <- x ^ 2
-plot(x, y, main = "Simple Scatter Plot", xlab = "X", ylab = "Y", 
+plot(x, y, main = "Simple Scatter Plot", xlab = "X", ylab = "Y",
      col = "blue", pch = 19)
 
 # Bar plot
@@ -237,6 +238,241 @@ hist(data, col = "lightblue", main = "Histogram Example")
 # is_prime <- function(n) {
 #   # Your code here
 # }
+
+# =====================================================
+# SECTION 8: DATA IMPORT AND EXPORT
+# =====================================================
+
+# 8.1 Reading CSV files
+# read.csv() is used to read CSV files
+# Example:
+# my_data <- read.csv("path/to/your/file.csv")
+
+# 8.2 Reading Excel files
+# First, install and load the readxl package
+# install.packages("readxl")
+# library(readxl)
+# my_data <- read_excel("path/to/your/file.xlsx")
+
+# 8.3 Writing data to files
+# Write to CSV
+# write.csv(my_data, "output.csv", row.names = FALSE)
+
+# Write to Excel
+# install.packages("writexl")
+# library(writexl)
+# write_xlsx(my_data, "output.xlsx")
+
+# =====================================================
+# SECTION 9: DATA CLEANING AND PREPROCESSING
+# =====================================================
+
+# 9.1 Handling missing values
+# Create a sample dataset with missing values
+sample_data <- data.frame(
+  name = c("Alice", "Bob", "Charlie", NA),
+  age = c(25, NA, 30, 35),
+  score = c(85, 90, NA, 95)
+)
+
+# Check for missing values
+is.na(sample_data)
+colSums(is.na(sample_data))
+
+# Remove rows with missing values
+clean_data <- na.omit(sample_data)
+
+# Replace missing values with mean
+sample_data$age[is.na(sample_data$age)] <- mean(sample_data$age, na.rm = TRUE)
+
+# 9.2 String manipulation
+# Basic string operations
+text <- "Hello, R Programming!"
+toupper(text)  # Convert to uppercase
+tolower(text)  # Convert to lowercase
+nchar(text)    # Count characters
+substr(text, 1, 5)  # Extract substring
+
+# 9.3 Date and time operations
+# Create date objects
+today <- Sys.Date()
+now <- Sys.time()
+
+# Format dates
+format(today, "%Y-%m-%d")
+format(now, "%H:%M:%S")
+
+# =====================================================
+# SECTION 10: BASIC STATISTICAL ANALYSIS
+# =====================================================
+
+# 10.1 Descriptive statistics
+# Create a sample dataset
+numbers <- c(10, 15, 20, 25, 30, 35, 40)
+
+# Basic statistics
+mean(numbers)
+median(numbers)
+sd(numbers)
+var(numbers)
+quantile(numbers)
+summary(numbers)
+
+# 10.2 Correlation analysis
+# Create two variables
+x <- c(1, 2, 3, 4, 5)
+y <- c(2, 4, 5, 4, 5)
+
+# Calculate correlation
+cor(x, y)
+
+# 10.3 Simple linear regression
+# Fit a linear model
+model <- lm(y ~ x)
+summary(model)
+
+# =====================================================
+# SECTION 11: DATA VISUALIZATION FUNDAMENTALS
+# =====================================================
+
+# 11.1 Basic plots
+# Create sample data
+x <- 1:10
+y <- x^2
+
+# Scatter plot
+plot(x, y, main = "Scatter Plot", xlab = "X", ylab = "Y")
+
+# Line plot
+plot(x, y, type = "l", main = "Line Plot")
+
+# Bar plot
+barplot(y, names.arg = x, main = "Bar Plot")
+
+# Histogram
+hist(y, main = "Histogram")
+
+# 11.2 Customizing plots
+# Add colors and points
+plot(x, y, 
+     main = "Customized Plot",
+     xlab = "X axis",
+     ylab = "Y axis",
+     col = "blue",
+     pch = 19,  # Solid circle
+     cex = 1.5) # Point size
+
+# Add a grid
+grid()
+
+# Add a legend
+legend("topleft", 
+       legend = "Data points",
+       col = "blue",
+       pch = 19)
+
+# =====================================================
+# SECTION 12: WORKING WITH FACTORS
+# =====================================================
+
+# 12.1 Creating and manipulating factors
+# Create a factor
+colors <- factor(c("red", "blue", "red", "green", "blue"))
+levels(colors)
+
+# Change factor levels
+colors <- factor(colors, levels = c("red", "green", "blue"))
+
+# 12.2 Cross-tabulation
+# Create sample data
+gender <- factor(c("M", "F", "M", "F", "M"))
+education <- factor(c("High", "Low", "High", "High", "Low"))
+
+# Create a contingency table
+table(gender, education)
+
+# =====================================================
+# SECTION 13: BASIC DATA TRANSFORMATION
+# =====================================================
+
+# 13.1 Subsetting and filtering
+# Create a sample dataset
+data <- data.frame(
+  name = c("Alice", "Bob", "Charlie", "David"),
+  age = c(25, 30, 35, 40),
+  score = c(85, 90, 95, 88)
+)
+
+# Subset by condition
+young_people <- data[data$age < 35, ]
+high_scores <- data[data$score >= 90, ]
+
+# 13.2 Sorting
+# Sort by age
+sorted_by_age <- data[order(data$age), ]
+sorted_by_age_desc <- data[order(-data$age), ]
+
+# 13.3 Aggregating data
+# Calculate mean score by age group
+data$age_group <- ifelse(data$age < 30, "Young", "Old")
+aggregate(score ~ age_group, data = data, FUN = mean)
+
+# =====================================================
+# SECTION 14: R MARKDOWN BASICS
+# =====================================================
+
+# To create an R Markdown document:
+# 1. In RStudio, go to File > New File > R Markdown
+# 2. Choose a title and output format
+# 3. Click OK
+
+# Basic R Markdown syntax:
+# ```{r}
+# # This is an R code chunk
+# x <- 1:10
+# mean(x)
+# ```
+
+# # This is a heading
+# This is regular text
+# *This is italic*
+# **This is bold**
+
+# =====================================================
+# EXERCISES FOR NEW TOPICS
+# =====================================================
+
+# Exercise 1: Data Cleaning
+# Create a function that cleans a dataset by:
+# - Removing rows with more than 2 missing values
+# - Replacing remaining missing values with column means
+# - Converting all character columns to factors
+
+# Exercise 2: Data Visualization
+# Create a function that generates a comprehensive plot of a dataset:
+# - Scatter plot for numeric variables
+# - Bar plot for categorical variables
+# - Add appropriate labels and title
+# - Use different colors for different categories
+
+# Exercise 3: Statistical Analysis
+# Create a function that performs basic statistical analysis:
+# - Calculate mean, median, standard deviation
+# - Perform correlation analysis between numeric variables
+# - Create a summary report
+
+# Exercise 4: Data Transformation
+# Create a function that transforms a dataset:
+# - Convert wide format to long format
+# - Create new variables based on existing ones
+# - Aggregate data by specified groups
+
+# Exercise 5: R Markdown Report
+# Create an R Markdown document that:
+# - Imports a dataset
+# - Performs basic analysis
+# - Creates visualizations
+# - Includes explanations and interpretations
 
 # =====================================================
 # CONCLUSION
